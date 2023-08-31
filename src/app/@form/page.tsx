@@ -2,29 +2,12 @@
 
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/input";
-import React, { FormEvent, useState } from "react";
-import { create } from "zustand";
+import React from "react";
 import Data from "../@data/page";
 import { Controller, useForm } from "react-hook-form";
 import { schema } from "../schema/DataSchema";
-import { Actions, State, Todo, TodoData } from "../types/type";
-
-/////////////////////zustand/////////////////
-const useTodoStore = create<State & Actions>((set) => ({
-  todos: [],
-  addTodo: (todo) => set((state) => ({ todos: [...state.todos, todo] })),
-  deleteTodo: (todo) =>
-    set((state) => ({
-      todos: state.todos.filter((item) => item.id !== todo.id),
-    })),
-  putTodo: (updatedTodo) =>
-    set((state) => ({
-      todos: state.todos.map((item) =>
-        item.id === updatedTodo.id ? updatedTodo : item
-      ),
-    })),
-}));
-/////////////////////zustand/////////////////
+import { Todo, TodoData } from "../types/type";
+import { useTodoStore } from "../schema/Store";
 
 function Form() {
   const addTodo = useTodoStore((state) => state.addTodo);
@@ -38,11 +21,8 @@ function Form() {
     reset,
     formState: { errors },
   } = useForm();
-  console.log("errors>", errors);
 
   const onSubmitHandler = (data: TodoData) => {
-    console.log(data);
-
     const validtion = schema.safeParse(data);
     if (validtion.success) {
       const newTodo: Todo = {
@@ -71,7 +51,17 @@ function Form() {
           <Controller
             name="title"
             control={control}
-            rules={{ required: "15자 이내로 입력하세요." }}
+            rules={{
+              required: "제목은 필수 입력 사항입니다.",
+              minLength: {
+                value: 1,
+                message: "제목은 최소 1자 이상 입력해야합니다.",
+              },
+              maxLength: {
+                value: 15,
+                message: "제목은 최대 15자까지 입력 가능합니다.",
+              },
+            }}
             render={({ field }) => (
               <div className="flex flex-col">
                 <Input
@@ -93,7 +83,17 @@ function Form() {
           <Controller
             name="content"
             control={control}
-            rules={{ required: "5자~20자 이내로 입력하세요." }}
+            rules={{
+              required: "내용은 필수 입력 사항입니다.",
+              minLength: {
+                value: 5,
+                message: "내용은 최소 5자 이상 입력해야합니다.",
+              },
+              maxLength: {
+                value: 10,
+                message: "내용은 최대 20자까지 입력 가능합니다.",
+              },
+            }}
             render={({ field }) => (
               <div className="flex flex-col">
                 <Input
@@ -110,7 +110,7 @@ function Form() {
             )}
           />
         </div>
-        <Button className="w-[255px] m-3">확인</Button>
+        <Button className="w-[300px] m-3">확인</Button>
       </form>
       <Data
         todoList={todoList}
