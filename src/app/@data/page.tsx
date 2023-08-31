@@ -4,10 +4,6 @@ import { DataProps } from "../types/type";
 import PutData from "../utils/PutData";
 
 const Data: React.FC<DataProps> = ({ todoList, deleteTodo, updateTodo }) => {
-  const onClickDelete = (item: any) => {
-    deleteTodo(item);
-    alert("삭제 되었습니다!");
-  };
   return (
     <div className="flex flex-wrap gap-5 w-[1095px] max-w-[1200px] h-[250px]">
       {todoList.map((item: any) => (
@@ -25,7 +21,10 @@ const Data: React.FC<DataProps> = ({ todoList, deleteTodo, updateTodo }) => {
             <Button
               className="w-[90px] mx-1 mt-4"
               type="button"
-              onClick={onClickDelete}
+              onClick={() => {
+                deleteTodo(item);
+                alert("삭제 되었습니다!");
+              }}
             >
               삭제
             </Button>

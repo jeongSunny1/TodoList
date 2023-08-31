@@ -6,7 +6,7 @@ import React from "react";
 import Data from "../@data/page";
 import { Controller, useForm } from "react-hook-form";
 import { schema } from "../schema/DataSchema";
-import { Todo, TodoData } from "../types/type";
+import { Todo } from "../types/type";
 import { useTodoStore } from "../schema/Store";
 
 function Form() {
@@ -114,7 +114,9 @@ function Form() {
             )}
           />
         </div>
-        <Button className="w-[300px] m-3">확인</Button>
+        <Button type="submit" className="w-[300px] m-3">
+          확인
+        </Button>
       </form>
       <Data
         todoList={todoList}
