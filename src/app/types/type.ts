@@ -23,6 +23,7 @@ export type DataProps = {
 export type PutProps = {
   item: any;
   updateTodo: (todo: Todo) => void;
+  deleteTodo: (todo: Todo) => void;
 };
 
 export type TodoData = {

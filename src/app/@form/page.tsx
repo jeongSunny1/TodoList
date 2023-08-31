@@ -3,11 +3,11 @@
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/input";
 import React from "react";
-import Data from "../@data/page";
 import { Controller, useForm } from "react-hook-form";
 import { schema } from "../schema/DataSchema";
 import { Todo } from "../types/type";
 import { useTodoStore } from "../schema/Store";
+import Data from "../utils/Data";
 
 function Form() {
   const addTodo = useTodoStore((state) => state.addTodo);
@@ -23,8 +23,6 @@ function Form() {
   } = useForm();
 
   const onSubmitHandler = (data: any) => {
-    console.log(data);
-
     const validtion = schema.safeParse(data);
     if (validtion.success) {
       const newTodo: Todo = {

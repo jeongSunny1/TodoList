@@ -1,7 +1,6 @@
-import Button from "@/components/ui/button";
 import React from "react";
 import { DataProps } from "../types/type";
-import PutData from "../utils/PutData";
+import DeletePutButton from "./DeletePutButton";
 
 const Data: React.FC<DataProps> = ({ todoList, deleteTodo, updateTodo }) => {
   return (
@@ -16,18 +15,11 @@ const Data: React.FC<DataProps> = ({ todoList, deleteTodo, updateTodo }) => {
           <p>내용: {item.content}</p>
 
           <div className="mt-3">
-            <PutData item={item} updateTodo={updateTodo} />
-
-            <Button
-              className="w-[90px] mx-1 mt-4"
-              type="button"
-              onClick={() => {
-                deleteTodo(item);
-                alert("삭제 되었습니다!");
-              }}
-            >
-              삭제
-            </Button>
+            <DeletePutButton
+              item={item}
+              updateTodo={updateTodo}
+              deleteTodo={deleteTodo}
+            />
           </div>
         </div>
       ))}
