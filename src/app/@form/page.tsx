@@ -22,7 +22,9 @@ function Form() {
     formState: { errors },
   } = useForm();
 
-  const onSubmitHandler = (data: TodoData) => {
+  const onSubmitHandler = (data: any) => {
+    console.log(data);
+
     const validtion = schema.safeParse(data);
     if (validtion.success) {
       const newTodo: Todo = {
@@ -66,6 +68,7 @@ function Form() {
               <div className="flex flex-col">
                 <Input
                   {...field}
+                  value={field.value || ""}
                   placeholder="내용을 입력하세요."
                   className="w-[255px]"
                 />
@@ -98,6 +101,7 @@ function Form() {
               <div className="flex flex-col">
                 <Input
                   {...field}
+                  value={field.value || ""}
                   placeholder="내용을 입력하세요."
                   className="w-[255px]"
                 />
