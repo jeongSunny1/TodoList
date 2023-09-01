@@ -12,12 +12,6 @@ type Props = {
   children: React.ReactNode;
 };
 
-type User = {
-  email: string;
-  name: string;
-  image?: string;
-} | null;
-
 export default async function RootLayout({ children }: Props) {
   return (
     <html lang="en">
