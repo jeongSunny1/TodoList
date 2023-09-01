@@ -30,3 +30,18 @@ export type TodoData = {
   title: string;
   content: string;
 };
+
+//login zustand
+export type Login = {
+  id: number;
+  email: string;
+  password: string;
+};
+//zustand
+export type LoginState = {
+  login: Login[];
+};
+//zustand
+export type LoginActions = {
+  loginCheck: (login: Login) => void;
+};

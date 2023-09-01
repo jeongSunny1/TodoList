@@ -1,4 +1,4 @@
-import { Actions, State } from "../types/type";
+import { Actions, LoginActions, LoginState, State } from "../types/type";
 import { create } from "zustand";
 
 export const useTodoStore = create<State & Actions>((set) => ({
@@ -14,4 +14,9 @@ export const useTodoStore = create<State & Actions>((set) => ({
         item.id === updatedTodo.id ? updatedTodo : item
       ),
     })),
+}));
+
+export const useLoginStore = create<LoginState & LoginActions>((set) => ({
+  login: [],
+  loginCheck: (todo) => set((state) => ({ login: [...state.login, todo] })),
 }));
