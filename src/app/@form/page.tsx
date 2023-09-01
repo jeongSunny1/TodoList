@@ -2,12 +2,12 @@
 
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/input";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { schema } from "../schema/DataSchema";
 import { Todo } from "../types/type";
 import { useTodoStore } from "../schema/Store";
-import Data from "../utils/Data";
+import Data from "../@data/page";
 
 function Form() {
   const addTodo = useTodoStore((state) => state.addTodo);
@@ -116,6 +116,7 @@ function Form() {
           확인
         </Button>
       </form>
+
       <Data
         todoList={todoList}
         deleteTodo={todos.deleteTodo}

@@ -1,3 +1,5 @@
+"use client";
+
 import Button from "@/components/ui/button";
 import Input from "@/components/ui/input";
 import React, { useState } from "react";
@@ -27,7 +29,6 @@ const DeletePutButton: React.FC<PutProps> = ({
     const validation = schema.safeParse(data);
     if (validation.success) {
       updateTodo({ ...item, title: newTitle, content: newContent });
-      reset();
       setIsOpen(false);
       alert("수정완료 되었습니다!");
     }
@@ -57,7 +58,7 @@ const DeletePutButton: React.FC<PutProps> = ({
             },
           }}
           render={({ field }) => (
-            <div className="">
+            <div>
               <Input
                 {...field}
                 // value={field.value || ""}
