@@ -2,24 +2,29 @@
 import React from "react";
 import Input from "@/components/ui/input";
 import { Controller, useForm } from "react-hook-form";
-import { Login } from "./types/type";
-import { loginSchema } from "./schema/DataSchema";
-import { useLoginStore } from "./schema/Store";
+import { Login } from "../types/type";
+import { loginSchema } from "../schema/DataSchema";
+import { useLoginStore } from "../schema/Store";
 import Button from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 function LoginValidation() {
   const loginCheck = useLoginStore((state) => state.loginCheck);
+  const login = useLoginStore();
 
   const {
     handleSubmit,
     control,
     reset,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    resolver: zodResolver(loginSchema),
+  });
 
   const onSubmitHandler = (data: any) => {
-    const validtion = loginSchema.safeParse(data);
-    if (validtion.success) {
+    let validation;
+    try {
+      validation = loginSchema.safeParse(data);
       const newTodo: Login = {
         id: Date.now(),
         email: data.email,
@@ -27,6 +32,8 @@ function LoginValidation() {
       };
       loginCheck(newTodo);
       reset();
+    } catch (e) {
+      console.log(e);
     }
   };
 
@@ -40,17 +47,6 @@ function LoginValidation() {
         <Controller
           name="email"
           control={control}
-          rules={{
-            required: "이메일은 필수 입력 사항입니다.",
-            minLength: {
-              value: 1,
-              message: "이메일은 최소 1자 이상 입력해야합니다.",
-            },
-            maxLength: {
-              value: 15,
-              message: "이메일은 최대 15자까지 입력 가능합니다.",
-            },
-          }}
           render={({ field }) => (
             <div className="flex flex-col">
               <Input
@@ -75,14 +71,6 @@ function LoginValidation() {
           control={control}
           rules={{
             required: "패스워드는 필수 입력 사항입니다.",
-            minLength: {
-              value: 8,
-              message: "패스워드는 최소 8자 이상 입력해야합니다.",
-            },
-            maxLength: {
-              value: 15,
-              message: "패스워드는 최대 15자까지 입력 가능합니다.",
-            },
           }}
           render={({ field }) => (
             <div className="flex flex-col">

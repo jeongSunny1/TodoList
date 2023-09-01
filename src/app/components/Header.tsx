@@ -5,15 +5,8 @@ import { useRouter } from "next/navigation";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Image from "next/image";
 
-type User = {
-  email: string;
-  name: string;
-  image?: string;
-};
-
 const Header = () => {
   const { data: session, status } = useSession();
-  console.log("session>", session);
 
   const route = useRouter();
 

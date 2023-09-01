@@ -1,5 +1,5 @@
 import React from "react";
-import LoginValidation from "../LoginValidation";
+import LoginValidation from "../utils/LoginValidation";
 
 function SignUp() {
   return (
