@@ -23,10 +23,10 @@ const Header = () => {
         {status === "authenticated" ? (
           // 로그인 한 상태
           <div className="flex flex-row items-center gap-3">
-            <p className="mt-3">안녕하세요, {session?.user.name}님!</p>
+            <p className="mt-3">안녕하세요, {session?.user?.name}님!</p>
             <Image
               className="w-[30px] h-[30px] rounded-full mt-3"
-              src={session?.user.image || ""}
+              src={session?.user?.image || ""}
               alt="image"
               width={30}
               height={30}

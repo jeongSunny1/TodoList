@@ -2,6 +2,8 @@ import "./globals.css";
 import type { Metadata } from "next";
 import AuthSession from "./utils/AuthSession";
 import Header from "./components/Header";
+import { DatePicker } from "antd";
+import Navbar from "./components/Navbar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,8 +18,10 @@ export default async function RootLayout({ children }: Props) {
   return (
     <html lang="en">
       <body>
+        {/* <DatePicker /> */}
         <AuthSession>
           <Header />
+          <Navbar />
           {children}
         </AuthSession>
       </body>
