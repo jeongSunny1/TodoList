@@ -6,14 +6,15 @@ import Input from "@/components/ui/input";
 import { Controller, useForm } from "react-hook-form";
 import { schema } from "../schema/DataSchema";
 import { Todo } from "../types/type";
-import { useTodoStore } from "../schema/Store";
+import { useTodoActions, useTodoStore, useTodos } from "../schema/Store";
 import Data from "../@data/page";
+import { Table } from "@/components/ui/table";
+import TestTable from "../components/TestTable";
 
 function Form() {
-  const addTodo = useTodoStore((state) => state.addTodo);
-  const putTodo = useTodoStore((state) => state.putTodo);
-  const todos = useTodoStore();
-  const todoList = todos.todos;
+  const todos = useTodos();
+  const { addTodo } = useTodoActions();
+  console.log(todos);
 
   const {
     handleSubmit,
@@ -33,10 +34,6 @@ function Form() {
       addTodo(newTodo);
       reset();
     }
-  };
-
-  const updateTodo = (updatedTodo: Todo) => {
-    putTodo(updatedTodo);
   };
 
   return (
@@ -117,11 +114,7 @@ function Form() {
         </Button>
       </form>
 
-      <Data
-        todoList={todoList}
-        deleteTodo={todos.deleteTodo}
-        updateTodo={updateTodo}
-      />
+      <Data todos={todos} />
     </div>
   );
 }

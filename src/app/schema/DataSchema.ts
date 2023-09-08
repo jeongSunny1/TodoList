@@ -24,3 +24,20 @@ export const loginSchema = z.object({
       message: "패스워드는 소문자 및 숫자를 포함해야 합니다.",
     }),
 });
+
+// state 스키마 정의
+export const TodoSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  content: z.string(),
+});
+
+// 전체 스토어에 대한 스키마 정의 (state + actions)
+export const TodoStoreSchema = z.object({
+  todos: TodoSchema.array(),
+  actions: z.object({
+    addTodo: z.function().args(z.string()),
+    deleteTodo: z.function().args(TodoSchema),
+    putTodo: z.function().args(TodoSchema),
+  }),
+});

@@ -6,16 +6,16 @@ import React, { useState } from "react";
 import { PutProps, Todo } from "../types/type";
 import { Controller, useForm } from "react-hook-form";
 import { schema } from "../schema/DataSchema";
+import { useTodoActions } from "../schema/Store";
 
-const DeletePutButton: React.FC<PutProps> = ({
-  item,
-  updateTodo,
-  deleteTodo,
-}) => {
+const DeletePutButton: React.FC<PutProps> = ({ item }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [newTitle, setNewTitle] = useState(item.title);
   const [newContent, setNewContent] = useState(item.content);
-
+  const { deleteTodo, putTodo } = useTodoActions();
+  const updateTodo = (updatedTodo: Todo) => {
+    putTodo(updatedTodo);
+  };
   const {
     handleSubmit,
     control,

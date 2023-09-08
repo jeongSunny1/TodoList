@@ -1,8 +1,12 @@
+import { TodoStoreSchema } from "../schema/DataSchema";
+import { z } from "zod";
+
 export type Todo = {
   id: number;
   title: string;
   content: string;
 };
+
 //zustand
 export type State = {
   todos: Todo[];
@@ -14,16 +18,18 @@ export type Actions = {
   putTodo: (todo: Todo) => void;
 };
 
+export type TodoStoreState = z.infer<typeof TodoStoreSchema>;
+
 export type DataProps = {
-  todoList: Todo[];
-  deleteTodo: (todo: Todo) => void;
-  updateTodo: (todo: Todo) => void;
+  todos: Todo[];
+  // deleteTodo: (todo: Todo) => void;
+  // updateTodo: (todo: Todo) => void;
 };
 
 export type PutProps = {
   item: any;
-  updateTodo: (todo: Todo) => void;
-  deleteTodo: (todo: Todo) => void;
+  // updateTodo: (todo: Todo) => void;
+  // deleteTodo: (todo: Todo) => void;
 };
 
 export type TodoData = {

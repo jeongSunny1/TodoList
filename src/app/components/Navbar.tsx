@@ -1,18 +1,22 @@
 "use client";
 import React, { useState } from "react";
 import classNames from "classnames";
+import { signIn, signOut, useSession } from "next-auth/react";
+import { Image } from "antd";
+import Link from "next/link";
 
 const Navbar = () => {
   const [menuToggle, setMenuToggle] = useState(false);
+  const { data: session, status } = useSession();
 
   return (
-    <nav className="bg-gray-100">
+    <nav className="border-b-2">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex justify-between">
           {/* 메뉴 */}
           <div className="flex space-x-4">
             <div>
-              <a href="#" className="flex items-center py-5 px-2 text-gray-700">
+              <p className="flex items-center py-5 px-2 text-gray-700">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5 mr-2 text-blue-400"
@@ -25,37 +29,50 @@ const Navbar = () => {
                     clipRule="evenodd"
                   />
                 </svg>
-                <span className="font-bold">Home</span>
-              </a>
-            </div>
-            <div className="hidden md:flex items-center space-x-1">
-              <a
-                href="#"
-                className="py-5 px-3 text-gray-700 hover:text-gray-900"
-              >
-                Features
-              </a>
-              <a
-                href="#"
-                className="py-5 px-3 text-gray-700 hover:text-gray-900"
-              >
-                Pricing
-              </a>
+                <Link href="/" className="font-bold">
+                  Home
+                </Link>
+              </p>
             </div>
           </div>
+          {status === "authenticated" ? (
+            // 로그인 한 상태
+            <div className="flex flex-row items-center gap-3">
+              <p>안녕하세요, {session?.user?.name}님!</p>
+              <Image
+                className="w-[30px] h-[30px] rounded-full"
+                src={session?.user?.image || ""}
+                alt="image"
+                width={30}
+                height={30}
+              />
+              <div className="hidden md:flex items-center space-x-1">
+                <Link href="/signup" className="py-5 px-3">
+                  회원가입
+                </Link>
+                <p
+                  className="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300"
+                  onClick={() => signOut()}
+                >
+                  로그아웃
+                </p>
+              </div>
+            </div>
+          ) : (
+            <div className="hidden md:flex items-center space-x-1">
+              <Link href="/signup" className="py-5 px-3">
+                회원가입
+              </Link>
+              <span
+                className="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300"
+                onClick={() => signIn()}
+              >
+                로그인
+              </span>
+            </div>
+          )}
 
           {/* 메뉴2 */}
-          <div className="hidden md:flex items-center space-x-1">
-            <a href="#" className="py-5 px-3">
-              Login
-            </a>
-            <a
-              href="#"
-              className="py-2 px-3 bg-yellow-400 hover:bg-yellow-300 text-yellow-900 hover:text-yellow-800 rounded transition duration-300"
-            >
-              Signup
-            </a>
-          </div>
 
           {/* mobile menu */}
           <div className="md:hidden flex items-center">
@@ -98,12 +115,12 @@ const Navbar = () => {
 
       {/* mobile menu items */}
       <div className={classNames("md:hidden", { hidden: !menuToggle })}>
-        <a href="#" className="block py-2 px-4 text-sm hover:bg-gray-200">
+        <Link href="/" className="block py-2 px-4 text-sm hover:bg-gray-200">
           Pricing
-        </a>
-        <a href="#" className="block py-2 px-4 text-sm hover:bg-gray-200">
+        </Link>
+        <Link href="/" className="block py-2 px-4 text-sm hover:bg-gray-200">
           Features
-        </a>
+        </Link>
       </div>
     </nav>
   );
