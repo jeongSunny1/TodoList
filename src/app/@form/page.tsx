@@ -10,6 +10,7 @@ import { useTodoActions, useTodoStore, useTodos } from "../schema/Store";
 import Data from "../@data/page";
 import { Table } from "@/components/ui/table";
 import TestTable from "../components/TestTable";
+import Infinte from "../@infinte/page";
 
 function Form() {
   const todos = useTodos();
@@ -114,7 +115,8 @@ function Form() {
         </Button>
       </form>
 
-      <Data todos={todos} />
+      {/* <Data todos={todos} /> */}
+      <Infinte />
     </div>
   );
 }
