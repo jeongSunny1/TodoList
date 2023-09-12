@@ -7,10 +7,7 @@ import { Controller, useForm } from "react-hook-form";
 import { schema } from "../schema/DataSchema";
 import { Todo } from "../types/type";
 import { useTodoActions, useTodoStore, useTodos } from "../schema/Store";
-import Data from "../@data/page";
-import { Table } from "@/components/ui/table";
-import TestTable from "../components/TestTable";
-import Infinte from "../@infinte/page";
+import DataList from "../@data/page";
 
 function Form() {
   const todos = useTodos();
@@ -65,7 +62,7 @@ function Form() {
                 <Input
                   {...field}
                   value={field.value || ""}
-                  placeholder="내용을 입력하세요."
+                  placeholder="제목을 입력하세요."
                   className="w-[255px]"
                 />
                 {errors.title && (
@@ -115,8 +112,7 @@ function Form() {
         </Button>
       </form>
 
-      {/* <Data todos={todos} /> */}
-      <Infinte />
+      <DataList todos={todos} />
     </div>
   );
 }

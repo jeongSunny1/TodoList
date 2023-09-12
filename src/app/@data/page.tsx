@@ -4,7 +4,7 @@ import { DataProps } from "../types/type";
 import DeletePutButton from "../utils/DeletePutButton";
 import { Loading } from "./Loading";
 
-const Data: React.FC<DataProps> = ({ todos }) => {
+const DataList: React.FC<DataProps> = ({ todos }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -44,4 +44,4 @@ const Data: React.FC<DataProps> = ({ todos }) => {
   );
 };
 
-export default Data;
+export default DataList;

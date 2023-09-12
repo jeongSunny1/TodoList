@@ -6,7 +6,7 @@ import {
   TodoStoreState,
 } from "../types/type";
 import { create } from "zustand";
-import { devtools, persist } from "zustand/middleware";
+import { createJSONStorage, devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import useStore from "../store/useStore";
 // export const useTodoStore = create<State & Actions>((set) => ({
@@ -51,7 +51,8 @@ export const useTodoStore = create<TodoStoreState>()(
         }),
         {
           name: "todo-storage",
-          partialize: (state) => ({ todos: state.todos }),
+          partialize: (state) => ({ todos: state.todos }), //local
+          // storage: createJSONStorage(() => sessionStorage)  //sessionStorage
         }
       )
     )
