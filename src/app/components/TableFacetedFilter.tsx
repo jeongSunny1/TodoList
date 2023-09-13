@@ -42,9 +42,13 @@ export function TableFacetedFilter<TData, TValue>({
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button className="h-8 border-dashed">
-          <PlusCircle className="mr-2 h-4 w-4" />
-          {title}
+        {/* status */}
+        <Button className="h-8 w-[110px] items-center border-dashed">
+          <div className="flex items-center">
+            <PlusCircle className="mr-2 h-4 w-4" />
+            {title}
+          </div>
+
           {selectedValues?.size > 0 && (
             <>
               <Separator orientation="vertical" className="mx-2 h-4" />

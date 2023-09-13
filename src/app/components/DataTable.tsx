@@ -115,7 +115,7 @@ export function DataTable<TData, TValue>({
     <>
       <div className="space-y-4">
         <TableViewOptions table={table} />
-        <StatusOptions table={table} />
+        {/* <StatusOptions table={table} /> */}
         <div className="rounded-md border">
           <Table>
             <TableHeader>
@@ -137,7 +137,6 @@ export function DataTable<TData, TValue>({
               ))}
             </TableHeader>
             <TableBody>
-              바디 !!
               {table.getRowModel().rows?.length ? (
                 table.getRowModel().rows.map((row) => (
                   <TableRow

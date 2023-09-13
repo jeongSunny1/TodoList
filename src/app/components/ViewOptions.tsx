@@ -23,12 +23,12 @@ export function TableViewOptions<TData>({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="ml-auto hidden h-8 lg:flex">
-          <SlidersHorizontal className="mr-2 h-4 w-4" />
-          View
+        <Button className="w-[100px] ml-auto hidden h-8 lg:flex gap-2 items-center">
+          <SlidersHorizontal className=" h-4 w-4" />
+          <p>View</p>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="w-[150px]">
+      <DropdownMenuContent align="end" className="w-[150px] bg-gray-100">
         <DropdownMenuLabel>Toggle columns</DropdownMenuLabel>
         <DropdownMenuSeparator />
         {table

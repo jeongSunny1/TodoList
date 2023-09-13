@@ -60,7 +60,7 @@ export function DataTableColumnHeader<TData, TValue>({
               )}
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="start">
+          <DropdownMenuContent align="start" className="bg-gray-100">
             <DropdownMenuItem onClick={() => column.toggleSorting(false)}>
               <ArrowUp className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
               Asc
@@ -106,7 +106,7 @@ export function TableFilterHeader<TData, TValue>({
           {title}
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-[200px] p-0" align="start">
+      <PopoverContent className="w-[200px] p-0 bg-gray-100" align="start">
         <Command>
           <CommandInput placeholder={title} />
           <CommandList>
