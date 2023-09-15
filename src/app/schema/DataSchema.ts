@@ -42,6 +42,7 @@ export const TodoStoreSchema = z.object({
   }),
 });
 
+//table의 데이터
 export const taskSchema = z.object({
   id: z.string(),
   title: z.string(),

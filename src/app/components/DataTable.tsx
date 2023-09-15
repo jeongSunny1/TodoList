@@ -25,11 +25,13 @@ import {
   getFacetedRowModel,
   getFacetedUniqueValues,
 } from "@tanstack/react-table";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { ListAmount } from "./ListAmount";
 import { Pagination } from "./Pagination";
 import { TableViewOptions } from "./ViewOptions";
 import StatusOptions from "./StatusOptions";
+import { useRouter } from "next/navigation";
+import { useTableStore } from "../schema/Store";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -64,12 +66,30 @@ export function DataTable<TData, TValue>({
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
-
+  const route = useRouter();
   const defaultData = useMemo(() => [], []);
   const pagination = useMemo(
     () => ({ pageIndex, pageSize }),
     [pageIndex, pageSize]
   );
+  const { tableTitle, setTableTitle } = useTableStore();
+  console.log("data", data);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const TABLEAPI = "http://localhost:4000/table";
+        const response = await fetch(TABLEAPI);
+        console.log(response);
+
+        const newData = await response.json();
+        setTableTitle(newData); // Zustand 상태 업데이트 //전체 데이터
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, [setTableTitle]);
 
   // 테이블 기능 설정
   const table = useReactTable({
@@ -109,7 +129,8 @@ export function DataTable<TData, TValue>({
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
-  console.log("table.getRowModel>", table.getRowModel().rows);
+
+  console.log(tableTitle);
 
   return (
     <>
@@ -137,32 +158,24 @@ export function DataTable<TData, TValue>({
               ))}
             </TableHeader>
             <TableBody>
-              {table.getRowModel().rows?.length ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && "selected"}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext()
-                        )}
-                      </TableCell>
-                    ))}
-                  </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    className="h-24 text-center"
-                  >
-                    No results.
+              {tableTitle.map((item) => (
+                <TableRow key={item.id}>
+                  <TableCell>
+                    id:
+                    {item.id}
+                    title:
+                    {item.title}
+                  </TableCell>
+
+                  <TableCell>
+                    <button
+                      onClick={() => route.push(`/tabledetail/${item.id}`)}
+                    >
+                      View Details
+                    </button>
                   </TableCell>
                 </TableRow>
-              )}
+              ))}
             </TableBody>
           </Table>
         </div>

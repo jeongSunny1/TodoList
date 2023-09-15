@@ -8,7 +8,7 @@ import {
 import { create } from "zustand";
 import { createJSONStorage, devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
-import useStore from "../store/useStore";
+import useStore from "../hooks/useStore";
 // export const useTodoStore = create<State & Actions>((set) => ({
 //   todos: [],
 //   addTodo: (todo) => set((state) => ({ todos: [...state.todos, todo] })),
@@ -68,4 +68,15 @@ export const useTodoActions = () => useTodoStore((state) => state.actions);
 export const useLoginStore = create<LoginState & LoginActions>((set) => ({
   login: [],
   loginCheck: (todo) => set((state) => ({ login: [...state.login, todo] })),
+}));
+
+///////////////////////////////////////////////////////////////////////////////////
+interface StoreState {
+  tableTitle: string[];
+  setTableTitle: (data: any[]) => void;
+}
+
+export const useTableStore = create<StoreState>((set) => ({
+  tableTitle: [],
+  setTableTitle: (data) => set({ tableTitle: data }),
 }));
