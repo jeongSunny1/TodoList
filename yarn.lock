@@ -3258,6 +3258,11 @@ rc-virtual-list@^3.5.1, rc-virtual-list@^3.5.2:
     rc-resize-observer "^1.0.0"
     rc-util "^5.36.0"
 
+react-complex-tree@^2.2.2:
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/react-complex-tree/-/react-complex-tree-2.2.2.tgz#aec2c0e9ff5e82f53dbb61806ca5fdcf82861607"
+  integrity sha512-KZb4KStosqAH5MEdgsVZvQSr8DS85W19OhZMeuYkNwJOYgNhKXrIf+b7FELN85iXdCNYZhLCORfLe1wxNx057Q==
+
 react-dom@18.2.0:
   version "18.2.0"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"

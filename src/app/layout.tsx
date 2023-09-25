@@ -4,6 +4,7 @@ import AuthSession from "./utils/AuthSession";
 import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import Providers from "@/lib/providers";
+import Offcanvas from "./components/Offcanvas";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -20,8 +21,9 @@ export default async function RootLayout({ children }: Props) {
       <body>
         <Providers>
           <AuthSession>
-            {/* <Header /> */}
-            <Navbar />
+            <Header />
+            {/* <Navbar /> */}
+            {/* <Offcanvas /> */}
             {children}
           </AuthSession>
         </Providers>
