@@ -23,8 +23,10 @@ export default async function RootLayout({ children }: Props) {
           <AuthSession>
             <Header />
             {/* <Navbar /> */}
-            {/* <Offcanvas /> */}
-            {children}
+            <div className="flex">
+              {/* <Offcanvas /> */}
+              {children}
+            </div>
           </AuthSession>
         </Providers>
       </body>

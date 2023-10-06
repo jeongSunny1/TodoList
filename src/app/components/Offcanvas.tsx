@@ -1,51 +1,47 @@
 "use client";
 
-import React, { useState } from "react";
-import "./OffCanvas.css";
-import { ButtonFont } from "../styles/font";
 import Link from "next/link";
-
+import React from "react";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 const OffCanvas = () => {
-  const [toggle, setToggle] = useState(false);
-
-  const handleToggle = () => {
-    setToggle(!toggle);
-  };
-
   return (
-    <div className="absolute block w-full h-[650px] ml-11 overflow-hidden text-clip">
-      <input
-        type="checkbox"
-        id="toggle"
-        checked={toggle}
-        onChange={handleToggle}
-        className="hidden"
-      />
-      <label htmlFor="toggle" className="inline-block py-[20px]">
-        Nav
-      </label>
+    <div className="border-r-2 w-[180px] p-9">
+      <h1 className="font-bold text-2xl">목록</h1>
 
-      <label htmlFor="toggle" className="closer"></label>
+      <div className="flex flex-col gap-2 mt-5">
+        <button>
+          <Sheet>
+            <SheetTrigger className="mr-10 text-lg ">TodoList</SheetTrigger>
 
-      <div className="offcanvas">
-        <h1 className="offcanvas-title">NAVIGATION</h1>
-        <ul className="offcanvas-list">
-          <li className="offcanvas-item">
-            <Link href="/todolist" className="text-white">
-              TodoList
-            </Link>
-          </li>
-          <li className="offcanvas-item">
-            <Link href="/infinite" className="text-white">
-              Infinite
-            </Link>
-          </li>
-          <li className="offcanvas-item">
-            <Link href="/table" className="text-white">
-              Table
-            </Link>
-          </li>
-        </ul>
+            <SheetContent className="w-[280px] ml-[180px]" side="left">
+              <SheetHeader>
+                <SheetTitle className="font-bold text-2xl mt-[75px]">
+                  부목록1
+                </SheetTitle>
+                <SheetDescription>
+                  <div className="flex flex-col gap-3">
+                    <Link href="/todolist" className="text-lg">
+                      TodoList
+                    </Link>
+                    <Link href="/infinite" className="text-lg">
+                      Infinite
+                    </Link>
+                    <Link href="/table" className="text-lg">
+                      Table
+                    </Link>
+                  </div>
+                </SheetDescription>
+              </SheetHeader>
+            </SheetContent>
+          </Sheet>
+        </button>
       </div>
     </div>
   );

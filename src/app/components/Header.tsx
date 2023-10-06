@@ -29,7 +29,7 @@ const Header = () => {
         <div className="flex flex-row items-center gap-3">
           <Sheet>
             <SheetTrigger>LOGO</SheetTrigger>
-            <SheetContent className="w-[600px] sm:w-[540px]" side="left">
+            <SheetContent className="w-[200px] sm:w-[140px]" side="left">
               <SheetHeader>
                 <SheetTitle className="font-bold text-2xl mt-10">
                   목록
@@ -45,6 +45,39 @@ const Header = () => {
                     <Link href="/table" className="text-lg">
                       Table
                     </Link>
+                    <Link href="/video" className="text-lg">
+                      Video
+                    </Link>
+                    <button>
+                      <Sheet>
+                        <SheetTrigger className="mr-10 text-lg">
+                          Sheet
+                        </SheetTrigger>
+                        <SheetContent className="ml-[150px]" side="left">
+                          <SheetHeader>
+                            <SheetTitle className="font-bold text-2xl mt-10">
+                              목록
+                            </SheetTitle>
+                            <SheetDescription>
+                              <div className="flex flex-col gap-2">
+                                <Link href="/todolist" className="text-lg">
+                                  TodoList
+                                </Link>
+                                <Link href="/infinite" className="text-lg">
+                                  Infinite
+                                </Link>
+                                <Link href="/table" className="text-lg">
+                                  Table
+                                </Link>
+                                <Link href="/video" className="text-lg">
+                                  Video
+                                </Link>
+                              </div>
+                            </SheetDescription>
+                          </SheetHeader>
+                        </SheetContent>
+                      </Sheet>
+                    </button>
                   </div>
                 </SheetDescription>
               </SheetHeader>
