@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+//임포트를 바꿔줬더니 type에러가 발생하지 않았다.
 import * as tus from "tus-js-client";
 
 function Video(): JSX.Element {
