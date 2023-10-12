@@ -919,6 +919,11 @@
   resolved "https://registry.npmjs.org/@tanstack/table-core/-/table-core-8.9.7.tgz"
   integrity sha512-lkhVcGDxa9GSoDFPkplPDvzsiUACPZrxT3U1edPs0DCMKFhBDgZ7d1DPd7cqHH0JoybfbQ/qiTQYOQBg8sinJg==
 
+"@types/js-cookie@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@types/js-cookie/-/js-cookie-3.0.4.tgz#23475b6d3b03acc84192e7c24da88eb38c1039ef"
+  integrity sha512-vMMnFF+H5KYqdd/myCzq6wLDlPpteJK+jGFgBus3Da7lw+YsDmx2C8feGTzY2M3Fo823yON+HC2CL240j4OV+w==
+
 "@types/json5@^0.0.29":
   version "0.0.29"
   resolved "https://registry.npmjs.org/@types/json5/-/json5-0.0.29.tgz"
@@ -2620,6 +2625,11 @@ minimist@^1.2.0, minimist@^1.2.6:
   resolved "https://registry.npmjs.org/minimist/-/minimist-1.2.8.tgz"
   integrity sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==
 
+moment@^2.29.4:
+  version "2.29.4"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
+  integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
+
 ms@2.1.2:
   version "2.1.2"
   resolved "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz"
@@ -3385,6 +3395,11 @@ react-datepicker@^4.20.0:
     prop-types "^15.7.2"
     react-onclickoutside "^6.13.0"
     react-popper "^2.3.0"
+
+react-day-picker@^8.8.2:
+  version "8.8.2"
+  resolved "https://registry.yarnpkg.com/react-day-picker/-/react-day-picker-8.8.2.tgz#1f778ad73fecf44105d2a02f5d15ec0eaa1afcc1"
+  integrity sha512-sK5M5PNZaLiszmACUKUpVu1eX3eFDVV+WLdWQ3BxTPbEC9jhuawmlgpbSXX5dIIQQwJpZ4wwP5+vsMVOwa1IRw==
 
 react-dom@18.2.0:
   version "18.2.0"
