@@ -1,6 +1,7 @@
 import React from "react";
 import CustomDatePicker from "./@datepicker/page";
 import DatePickerDemo from "./components/DatePickerDemo";
+import DatePickerDemo2 from "./components/DatePickerDemo2";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <h2 className="text-red-300 text-5xl	font-semibold">Main Page</h2>
       <h2 className="text-red-300 text-3xl">환영합니다. 메인 페이지입니다.</h2>
       <DatePickerDemo />
+      <DatePickerDemo2 />
     </div>
   );
 }
