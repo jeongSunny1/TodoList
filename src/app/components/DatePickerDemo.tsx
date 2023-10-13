@@ -1,10 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-
-import { TimePicker } from "antd";
-import moment from "moment"; //날짜 및 시간을 다루는 라이브러리
 import DatePickerPopver from "./DatePickerPopver";
+import dayjs from "dayjs";
 
 function DatePickerDemo() {
   const [date, setDate] = useState<Date>();
@@ -13,6 +11,24 @@ function DatePickerDemo() {
   const onChageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTime(e.target.value);
   };
+
+  const addTime = (date: Date | undefined, time: string) => {
+    const hour = time ? time.split(":")[0] : "00";
+    const minute = time ? time.split(":")[1] : "00";
+    try {
+      if (!dayjs(date ? date : "").isValid()) return undefined;
+
+      return dayjs(date)
+        .add(Number(hour), "h")
+        .add(Number(minute), "m")
+        .format();
+    } catch {
+      return undefined;
+    }
+  };
+  console.log(addTime(date, time));
+  console.log("date", date);
+  console.log("time", time);
 
   return (
     <>
