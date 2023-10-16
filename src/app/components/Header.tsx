@@ -24,9 +24,9 @@ const Header = () => {
   };
 
   return (
-    <div className="max-w-[1200px] p-2 mx-auto">
+    <div className="max-w-[1480px] p-2 mx-auto border">
       <div className="flex flex-row items-center justify-between">
-        <div className="flex flex-row items-center gap-3">
+        <div className="flex flex-row items-center gap-5">
           <Sheet>
             <SheetTrigger>LOGO</SheetTrigger>
             <SheetContent className="w-[200px] sm:w-[140px]" side="left">
@@ -83,14 +83,14 @@ const Header = () => {
               </SheetHeader>
             </SheetContent>
           </Sheet>
-          <Button type="button" className="mt-3" onClick={onClickRouter}>
+          <Button type="button" onClick={onClickRouter}>
             홈으로 가기
           </Button>
         </div>
         {status === "authenticated" ? (
           // 로그인 한 상태
           <div className="flex flex-row items-center gap-3">
-            <p className="mt-3">안녕하세요, {session?.user?.name}님!</p>
+            <p>안녕하세요, {session?.user?.name}님!</p>
             <Image
               className="w-[30px] h-[30px] rounded-full mt-3"
               src={session?.user?.image || ""}
@@ -98,13 +98,13 @@ const Header = () => {
               width={30}
               height={30}
             />
-            <Button type="submit" className="mt-3" onClick={() => signOut()}>
+            <Button type="submit" onClick={() => signOut()}>
               로그아웃
             </Button>
           </div>
         ) : (
           <div className="flex flex-row gap-3">
-            <Button type="submit" className="mt-3" onClick={() => signIn()}>
+            <Button type="submit" onClick={() => signIn()}>
               로그인
             </Button>
           </div>

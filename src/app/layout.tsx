@@ -5,6 +5,7 @@ import Header from "./components/Header";
 import Navbar from "./components/Navbar";
 import Providers from "@/lib/providers";
 import Offcanvas from "./components/Offcanvas";
+import DarkMode from "./components/DarkMode";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,10 +24,9 @@ export default async function RootLayout({ children }: Props) {
           <AuthSession>
             <Header />
             {/* <Navbar /> */}
-            <div className="flex">
-              {/* <Offcanvas /> */}
-              {children}
-            </div>
+            {/* <Offcanvas /> */}
+            {children}
+            <DarkMode />
           </AuthSession>
         </Providers>
       </body>
