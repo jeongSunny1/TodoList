@@ -27,12 +27,9 @@ function DatePickerDemo() {
     }
   };
   console.log(addTime(date, time));
-  console.log("date", date);
-  console.log("time", time);
-
   return (
     <>
-      <h1>테스트1</h1>
+      <h1>날짜 시간 같이 찍히는 테스트</h1>
 
       <DatePickerPopver date={date} setDate={setDate} />
       <input
