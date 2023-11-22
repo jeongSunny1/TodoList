@@ -5,11 +5,6 @@ import DatePickerPopver from "./DatePickerPopver";
 
 function DatePickerDemo2() {
   const [date, setDate] = useState<Date>();
-  const [time, setTime] = useState("");
-
-  const onChageHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTime(e.target.value);
-  };
 
   return (
     <>

@@ -27,6 +27,8 @@ function DatePickerDemo() {
     }
   };
   console.log(addTime(date, time));
+  console.log(date);
+
   return (
     <>
       <h1>날짜 시간 같이 찍히는 테스트</h1>
