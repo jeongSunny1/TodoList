@@ -9,20 +9,6 @@ import { create } from "zustand";
 import { createJSONStorage, devtools, persist } from "zustand/middleware";
 import { immer } from "zustand/middleware/immer";
 import useStore from "../hooks/useStore";
-// export const useTodoStore = create<State & Actions>((set) => ({
-//   todos: [],
-//   addTodo: (todo) => set((state) => ({ todos: [...state.todos, todo] })),
-//   deleteTodo: (todo) =>
-//     set((state) => ({
-//       todos: state.todos.filter((item) => item.id !== todo.id),
-//     })),
-//   putTodo: (updatedTodo) =>
-//     set((state) => ({
-//       todos: state.todos.map((item) =>
-//         item.id === updatedTodo.id ? updatedTodo : item
-//       ),
-//     })),
-// }));
 
 export const useTodoStore = create<TodoStoreState>()(
   immer(
@@ -32,7 +18,6 @@ export const useTodoStore = create<TodoStoreState>()(
           todos: [],
           actions: {
             addTodo: (todo) => {
-              // console.log("Add Todo:", todo);
               set((state) => ({ todos: [...state.todos, todo] }));
             },
             deleteTodo: (todo) => {

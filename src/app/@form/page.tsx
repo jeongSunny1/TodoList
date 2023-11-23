@@ -12,7 +12,6 @@ import DataList from "../@data/page";
 function Form() {
   const todos = useTodos();
   const { addTodo } = useTodoActions();
-  console.log(todos);
 
   const {
     handleSubmit,
