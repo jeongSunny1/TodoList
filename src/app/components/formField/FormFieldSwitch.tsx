@@ -17,7 +17,7 @@ function FormFieldSwitch({ form }: any) {
       <div className="space-y-4">
         <FormField
           control={form.control}
-          name="communication_emails"
+          name="switch"
           render={({ field }) => (
             <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4 bg-slate-100">
               <div className="space-y-0.5">

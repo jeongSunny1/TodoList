@@ -12,6 +12,7 @@ import FormFieldRadio from "../components/formField/FormFieldRadio";
 import FormFieldSwitch from "../components/formField/FormFieldSwitch";
 import FormFieldInput from "../components/formField/FormFieldInput";
 import FormFieldSelect from "../components/formField/FormFieldSelect";
+import FormFieldDate from "../components/formField/FormFieldDate";
 
 function FormFiledPage() {
   //refine은 zod 라이브러리에서 제공하는 메서드 중 하나로 스키마의 값을 추가적으로 검증하거나 수정할 수 있음
@@ -23,7 +24,7 @@ function FormFiledPage() {
     items: z.array(z.string()).refine((value) => value.some((item) => item), {
       message: "하나는 선택해야합니다.",
     }),
-    communication_emails: z.boolean().default(false).optional(),
+    switch: z.boolean().default(false).optional(),
     username: z
       .string({
         required_error: "필수값입니다.",
@@ -41,23 +42,27 @@ function FormFiledPage() {
       .email({
         message: "이메일 형식이아닙니다.",
       }),
+    date: z.date({
+      required_error: "필수값입니다.",
+    }),
   });
 
   const defaultValue = {
     items: [],
-    communication_emails: false,
+    switch: false,
     username: "",
     email: "",
+    date: new Date(),
   };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: defaultValue,
   });
-  console.log("defaultValue>", defaultValue);
 
   const onsubmit = () => {
     alert("제출했습니다.");
+    console.log("Form :", form.getValues());
     form.reset(defaultValue);
   };
 
@@ -79,6 +84,8 @@ function FormFiledPage() {
           {/* 5 */}
           <FormFieldSelect form={form} />
         </div>
+        {/* 6 */}
+        <FormFieldDate form={form} />
 
         <Button type="submit">Update</Button>
       </form>
