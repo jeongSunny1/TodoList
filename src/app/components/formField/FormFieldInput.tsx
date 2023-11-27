@@ -1,3 +1,4 @@
+import Button from "@/components/ui/button";
 import {
   FormControl,
   FormField,
@@ -8,7 +9,12 @@ import {
 import Input from "@/components/ui/input";
 import React from "react";
 
-function FormFieldInput({ form }: any) {
+interface PropsInput {
+  form: any;
+  onDeleteUsername: () => void;
+}
+
+function FormFieldInput({ form, onDeleteUsername }: PropsInput) {
   return (
     <>
       <FormField
@@ -20,10 +26,11 @@ function FormFieldInput({ form }: any) {
             <FormControl>
               <Input onChange={field.onChange} value={field.value} />
             </FormControl>
-            <FormMessage className="h-5 text-red-500" />
+            <FormMessage className="text-red-500" />
           </FormItem>
         )}
       />
+      <Button onClick={onDeleteUsername}>DELETE</Button>
     </>
   );
 }

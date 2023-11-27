@@ -32,16 +32,19 @@ function FormFieldDate({ form }: any) {
                 <FormControl>
                   <Button
                     className={cn(
-                      "w-[240px] pl-3 text-left font-normal",
+                      "w-[240px] text-left font-normal flex items-center",
                       !field.value && "text-muted-foreground"
                     )}
                   >
                     {field.value ? (
-                      format(field.value, "PPP")
+                      format(field.value, "PP MM dd")
                     ) : (
-                      <span>Pick a date</span>
+                      <span className="text-white">Pick a date</span>
                     )}
-                    <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                    <CalendarIcon
+                      className="ml-auto h-4 w-4 opacity-50"
+                      color="white"
+                    />
                   </Button>
                 </FormControl>
               </PopoverTrigger>
@@ -57,7 +60,7 @@ function FormFieldDate({ form }: any) {
                 />
               </PopoverContent>
             </Popover>
-            <FormMessage className=" text-red-500" />
+            <FormMessage className="text-red-500" />
           </FormItem>
         )}
       />

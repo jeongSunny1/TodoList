@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -13,46 +13,32 @@ import FormFieldSwitch from "../components/formField/FormFieldSwitch";
 import FormFieldInput from "../components/formField/FormFieldInput";
 import FormFieldSelect from "../components/formField/FormFieldSelect";
 import FormFieldDate from "../components/formField/FormFieldDate";
+import { formSchema } from "./schema/Schema";
+import FormFiledArrayInput from "../components/formField/FormFiledArrayInput";
+
+const defaultUserArray = [
+  {
+    name: "Test",
+    emailUser: "test",
+    emailUrl: "@goole.com",
+  },
+];
 
 function FormFiledPage() {
-  //refine은 zod 라이브러리에서 제공하는 메서드 중 하나로 스키마의 값을 추가적으로 검증하거나 수정할 수 있음
-  //some은 조건에 만족하면 true값을 return
-  const formSchema = z.object({
-    type: z.enum(["all", "mentions", "none"], {
-      required_error: "하나는 선택해야합니다.",
-    }),
-    items: z.array(z.string()).refine((value) => value.some((item) => item), {
-      message: "하나는 선택해야합니다.",
-    }),
-    switch: z.boolean().default(false).optional(),
-    username: z
-      .string({
-        required_error: "필수값입니다.",
-      })
-      .min(2, {
-        message: "2글자 이상으로 입력해야합니다.",
-      })
-      .max(30, {
-        message: "30자 이하로 입력해야합니다.",
-      }),
-    email: z
-      .string({
-        required_error: "필수값입니다.",
-      })
-      .email({
-        message: "이메일 형식이아닙니다.",
-      }),
-    date: z.date({
-      required_error: "필수값입니다.",
-    }),
-  });
+  const [userArray, setUserArray] = useState(
+    defaultUserArray.map((user) => ({
+      ...user,
+      get email() {
+        return `${user.emailUser}${user.emailUrl}`;
+      },
+    }))
+  );
 
   const defaultValue = {
     items: [],
     switch: false,
-    username: "",
-    email: "",
-    date: new Date(),
+    date: null,
+    userArray: userArray,
   };
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -60,34 +46,102 @@ function FormFiledPage() {
     defaultValues: defaultValue,
   });
 
+  //테스트 완료 form.reset(defaultValue); 지우면 됨.
+  const onDeleteErrorMsg = () => {
+    if (form.getValues("username") === "test") {
+      form.setError("username", {
+        message: "통과.",
+      });
+      console.log("통과");
+      return true;
+    }
+    console.log("실패");
+    return false;
+  };
+
+  //Form에서 Submit을 제어
+  const [isSubmit, setIsSubmit] = useState(false);
+
   const onsubmit = () => {
+    console.log("Form~~~");
+
+    onDeleteErrorMsg();
     alert("제출했습니다.");
-    console.log("Form :", form.getValues());
+    console.log("Form:", form.getValues());
+
     form.reset(defaultValue);
+  };
+
+  console.log("Form 2:", form.getValues());
+
+  //특정 필드를 지우고 싶을때 사용
+  const onDeleteUsername = () => {
+    alert("필드를 지웠습니다.");
+    form.resetField("username");
+  };
+
+  //초기화
+  const onReset = () => {
+    setIsSubmit(false);
+    form.reset();
+    //에러메시지 지워줌
+    // form.clearErrors("userArray");
   };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onsubmit)} className="space-y-8 p-3">
-        {/* 1 */}
-        <FormFieldCheckbox form={form} />
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          if (isSubmit) {
+            form.handleSubmit(onsubmit)();
+          }
+        }}
+        className="space-y-8 p-3 flex flex-col"
+      >
+        <div className="flex justify-around">
+          {/* 1 */}
+          <FormFieldCheckbox form={form} />
 
-        {/* 2 */}
-        <FormFieldRadio form={form} />
+          {/* 2 */}
+          <FormFieldRadio form={form} />
 
-        {/* 3 */}
-        <FormFieldSwitch form={form} />
-
-        <div className="flex gap-2">
-          {/* 4 */}
-          <FormFieldInput form={form} />
-          {/* 5 */}
-          <FormFieldSelect form={form} />
+          {/* 3 */}
+          <FormFieldSwitch form={form} />
         </div>
-        {/* 6 */}
-        <FormFieldDate form={form} />
 
-        <Button type="submit">Update</Button>
+        <div className="flex justify-around">
+          {/* 6 */}
+          {/* <FormFieldDate form={form} /> */}
+        </div>
+
+        {/* <div className="flex gap-2">
+          <FormFieldInput form={form} onDeleteUsername={onDeleteUsername} />
+          <FormFieldSelect form={form} />
+        </div> */}
+
+        {/* 7 */}
+        <FormFiledArrayInput form={form} />
+
+        <div className="flex justify-center gap-2">
+          <Button
+            type="submit"
+            onClick={() => {
+              setIsSubmit(true);
+              form.handleSubmit(onsubmit)();
+            }}
+          >
+            Update
+          </Button>
+
+          <Button
+            type="button"
+            onClick={onReset}
+            className="bg-white border-2 border-pink-200 text-violet-400"
+          >
+            Reset
+          </Button>
+        </div>
       </form>
     </Form>
   );

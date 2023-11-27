@@ -22,6 +22,9 @@ const Header = () => {
   const onClickRouter = () => {
     route.push("/");
   };
+  const onBackClick = () => {
+    route.replace("/");
+  };
 
   return (
     <div className="max-w-[1480px] p-2 mx-auto border">
@@ -83,6 +86,9 @@ const Header = () => {
               </SheetHeader>
             </SheetContent>
           </Sheet>
+          <Button type="button" onClick={onBackClick}>
+            뒤로가기
+          </Button>
           <Button type="button" onClick={onClickRouter}>
             홈으로 가기
           </Button>
